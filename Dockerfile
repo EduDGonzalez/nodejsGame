@@ -2,11 +2,11 @@ FROM node:14
 
 WORKDIR /app
 
-COPY package*.json .
+COPY package*.json ./
 
 RUN npm install
 
-COPY server.js .
+COPY server.js ./
 
 EXPOSE 3306
 
