@@ -1,7 +1,7 @@
 const express = require('express')
 const pool = require('./db')
 const app = express()
-const port = process.env.PORT
+const port = process.env.PORT || 8080
 var mysql = require('mysql')
 
 app.use(express.json())
