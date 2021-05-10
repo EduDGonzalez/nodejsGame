@@ -3,10 +3,10 @@ var mariadb = require('mariadb');
 
 //create a new connectionPool
 const pool = mariadb.createPool({
-    host: "us-cdbr-east-03.cleardb.com",
-    user: "bfb8c00a7a8641",
-    password: "2cc1db28",
-    database: "heroku_e6cf2ba1d21c3ac"
+    host: "127.0.0.1",
+    user: "root",
+    password: "Password123!",
+    database: "game"
 });
 
 //expose the ability to create new connections
