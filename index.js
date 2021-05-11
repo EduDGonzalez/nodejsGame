@@ -116,7 +116,7 @@ async function registerUser(req,res,next){
 }
 
 //POST PUNTUACION http://localhost:8080/leaderboard/submit
-app.post('leaderboard/submit', async(req,res)=>{
+app.post('/leaderboard/submit', async(req,res)=>{
     let conn;
     //El body trae en JSON la informacion del formulario generado en el cliente 
 
