@@ -151,6 +151,25 @@ app.post('/leaderboard/submit', async(req,res)=>{
 
 
 //GET PARA TENER PUNTUACIONES http://localhost:8080/leaderboard
+app.get('/leaderboard',async (req,res)=>{
+    let conn;
+    console.log("llega get puntuacion");
+    console.log("============================");
+    try{
+        conn = await pool.getConnection();
+
+        let query = `select u.nombre_usuario,p.puntuacion from puntuaciones p, usuarios u where u.id = p.id_usuario order by p.puntuacion desc limit 10`
+
+        let rows = await conn.query(query);
+
+        res.send(rows);
+        
+    }catch(err){
+        throw err;
+    }finally{
+        if(conn) return conn.release();
+    }
+})
 
 app.get("/", (req,res)=>{
     res.send("hola mundo");
