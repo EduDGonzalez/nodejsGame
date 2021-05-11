@@ -116,6 +116,38 @@ async function registerUser(req,res,next){
 }
 
 //POST PUNTUACION http://localhost:8080/leaderboard/submit
+app.post('leaderboard/submit', async(req,res)=>{
+    let conn;
+    //El body trae en JSON la informacion del formulario generado en el cliente 
+
+                        /*  {
+                                "id_usuario":"...",
+                                "puntuacion":"...",
+                            } */
+                            
+    console.log("llega post puntuacion");
+    console.log("============================");
+    console.log(req.body);
+    console.log("============================");
+    let puntuacion = req.body;
+    try{
+        conn = await pool.getConnection();
+        let query = `insert into ??(??,??) values (?,?)`;
+        let tabla = ["puntuaciones","id_usuario","puntuacion",puntuacion.id_usuario,puntuacion.puntuacion];
+        query = mysql.format(query,tabla);
+
+        await conn.query(query).then(data =>{
+            res.status(201).send({auth :  true,"Error" : false, "Message" : "Puntuacion guardada!"});
+        }).catch(err => {
+            res.status(500).send({
+                auth :  true,"Error" : true, "Message" : "Error al intentar añadir la puntuacion"});
+        })
+    }catch(err){
+        throw err;
+    }finally{
+        if(conn) return conn.release();
+    }
+});
 
 
 //GET PARA TENER PUNTUACIONES http://localhost:8080/leaderboard
